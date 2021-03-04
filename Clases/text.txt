@@ -1,0 +1,55 @@
+estructuras ha realizar
+    Pila de carretas -->
+
+    cola de personas -->espera de carretas
+                     -->para pagos
+
+    Lista circular de personas
+                                --> comprando
+
+    Lista Doblemente enlazada de cajas-->
+
+Realizar antes de la simulacion:
+    - pedir -->cantidad de carretas     //listo
+            -->cantidad de Clientes     //listo
+            -->cantidad de cajas        //listo
+
+    - crear -->clientes                 //listo
+            -->carretas                 //listo
+            -->cajas
+            --> Pila de c                                                                       a de espera (para realiar pagos)
+            --> L. doble de cajas
+
+
+    1. apilar las carretas
+    2. encolar clientes para tomar una carreta
+    3. Lista circular "vacia"
+    4. cola de pagos  "vacia"
+
+//cliente llega, toma una carreta , pasa a comprar, y luego a pagar, regresa la carreta ys se elimina el cliente
+
+
+
+Simulacion: (repetir hasta que no existan clientes en ninguna estructura)
+
+    1. verificar si hay clientes esperando carretas
+                si hay clientes  verificar si hay carretas disponibles
+                si hay carretas el cliente toma una carreta y pasa comprar (lista circular)
+                sino hay carretas saltarse este paso
+    2. generar numero aleatorio
+            verificar si hay un cliente que coincida con el numero generado
+            si existe la coincidencia pasarlo a la cola de pagos
+            sino saltarse este paso
+    3. verificar si hay cajas disponibles
+         si hay cajas disponibles verificar si hay clientes a la espera de pagar
+         si hay clientes pasarlo a la caja (lista doblemente enlazada)
+
+    4. buscar cajas ocupadas,
+        si hay cajas ocupadas elegir una y terminar el pago
+        eliminar el cliente y apilar la carreta
+
+
+
+
+
+
