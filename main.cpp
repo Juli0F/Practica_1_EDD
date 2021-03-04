@@ -8,6 +8,7 @@
 #include "Clases/Lista_Circular.h"
 #include "Clases/ListaDoble.h"
 #include "file/File.h"
+#include "Estructuras/ColaAux.h"
 #include <chrono>
 #include <thread>
 
@@ -26,17 +27,9 @@ void tomarCarreta(Pila *pila);
 void clientesComprando();
 void pagandoCompras();
 void devolverCarreta(Carreta *carreta,int num);
+void writeFile(File *graph);
 
 int numRandom(int limitInferior, int limiteSuperior);
-
-
-
-
-
-
-
-
-
 
 
 Pila *pilaCarretas; //pila de carretas disponibles
@@ -48,7 +41,7 @@ Lista_Circular *comprando; //clientes haciendo compras
 
 Cola *esperandoCarreta;//Clientes que llegan al supermercado, inicialmente pasan por una carreta
 Cola *esperandoTurnoP; //clientes esperando a pagar
-
+ColaAux *colaAux;
 int paso = 0;
 int clientesDisp;
 int tes = -1;
@@ -57,13 +50,13 @@ int main() {
 
 File *file = new File();
 //file->crearCarpeta("mkdir prueba");
-file->crearCarpeta("ls");
 
-char *test = "#!/bin/bash if [ -d 'prueba' ] then echo 'El directorio ${prueba} existe' else echo 'El directorio ${prueba} no existe' fi";
-file->crearCarpeta(test);
+
+//char *test = "#!/bin/bash if [ -d 'prueba' ] then echo 'El directorio ${prueba} existe' else echo 'El directorio ${prueba} no existe' fi";
+//file->crearCarpeta(test);
     //system("dot -Tpng /home/cross/Documents/img.dot -o nombre_de_imagen_generada.png");
 
-    system("nohup.out display /home/cross/Documents/nombre_de_imagen_generada.png &" );
+
 
 //system("shotwell /home/cross/Documents/imG_GeNEeRatEd.png");
 //system("shotwell /home/cross/Documents/imG_GeNEeRatEd.png");
@@ -73,7 +66,7 @@ file->crearCarpeta(test);
     int cantCajas;
 
     comprando = new Lista_Circular(); //inicialmente esta vacia, ya que nadie esta comprando
-    esperandoTurnoP = new Cola();//inicialemte nadie esta haciendo cola para pagar
+    esperandoTurnoP = new Cola(2);//inicialemte nadie esta haciendo cola para pagar
 
     cout<<"Cantidad de Clientes: ";
     cin>>cantClientes;
@@ -86,8 +79,10 @@ file->crearCarpeta(test);
 
      crearClientes(cantClientes); //cola de espera para tomar una carreta
      crearCarretas(cantCarretas); //pila de carretas
+     crearCajas(cantCajas);
 
-    crearCajas(cantCajas);
+
+
 
     //################################################simulacion###############################
 
@@ -103,7 +98,9 @@ file->crearCarpeta(test);
 
 void crearClientes(int cant){
 
-     esperandoCarreta = new Cola();
+    esperandoCarreta = new Cola(1);
+
+
     Cliente *cliente ;
     NodoCliente *nodoCliente;
 
@@ -113,11 +110,12 @@ void crearClientes(int cant){
             nodoCliente = new NodoCliente(i,cliente, nullptr);
             esperandoCarreta->encolar(nodoCliente);
     }
+    colaAux = static_cast<ColaAux *>(esperandoCarreta);
 
 }
 void crearCarretas(int cant){
-    pilaCarretas =  new Pila(nullptr);
-    pilaCarretas_2 =  new Pila(nullptr);
+    pilaCarretas =  new Pila(nullptr,1);
+    pilaCarretas_2 =  new Pila(nullptr,2);
 
     Nodo *nodoCarreta ;
     Carreta *carreta;
@@ -155,15 +153,32 @@ void simulador(){
 clientesDisp = 0;
     cout<<"Inicia Simulacion"<<endl;
     do {
+        File *graph =new File();
 
+        graph->escribirArchivo();
+
+        paso++;
+        cout<<"----------------------Paso "<<paso<<", Tomar Carreta ----------------------"<<endl;
         //paso uno llega el cliente
         clientesLllegan();
+
+
+        writeFile(graph);
+
+        paso++;
+        cout<<"----------------------Paso "<<paso<<", Cola para Pagar----------------------"<<endl;
         //paso dos el cliente esta comprando, y  uno de ellos es posible que pase a pagar
         clientesComprando();
+
+
+        paso++;
+        cout<<"----------------------Paso "<<paso<<", En Caja ----------------------"<<endl;
         //paso tres, cliente pasa a pagar
         pagandoCompras();
 
         cout<<"Valor FInal antes whie: "<<((esperandoTurnoP->isEmpty() ) && (esperandoCarreta->isEmpty()) && (comprando->isEmpty()))<<endl;
+
+        graph->closeFile();
     } while (!((esperandoTurnoP->isEmpty() ) && (esperandoCarreta->isEmpty()) && (comprando->isEmpty())));
 
 }
@@ -177,24 +192,18 @@ void clientesLllegan(){
 
                 tomarCarreta(pilaCarretas);
 
-
             } else if (!pilaCarretas_2->isEmpty()) {//pila uno esta vacia, por lo que se verifica la pila dos
 
                 tomarCarreta(pilaCarretas_2);
-
-
             }
-
         } else {
-
             cout << "No hay Clientes esperando" << endl;
             break;
         }
     }
 }
 void tomarCarreta(Pila *pila){
-    paso++;
-    cout<<"----------------------Paso "<<paso<<", Tomar Carreta ----------------------"<<endl;
+
     NodoCliente *clienteConCarreta = esperandoCarreta->desEncolar(); //pasa a tomar su carreta
     cout<<"Cliente: "<<clienteConCarreta->getCliente()->getId()<<" tomara la Carreta: "<<pila->peek()->getId()<<" Para Pasar a Comprar"<<endl;
     clienteConCarreta->getCliente()->setCarreta(pila->pop()->getCarreta()); //toma su carreta de la pila
@@ -217,12 +226,10 @@ void clientesComprando(){
 
         if (!(comprando->isEmpty())) {
             //cout<<"Nodo comprando"<<comprando->getNodoCliente()->getCliente()->getId()<<endl;
-            paso++;
-            cout<<"----------------------Paso "<<paso<<", Pasa A La COla de Pagos ----------------------"<<endl;
 
 
             //revisar el metodo buscar nodo Cliente by id cliente
-            int num =numRandom(0, 3);
+            int num =numRandom(0, 100);
 
             NodoCliente *nodoCliente = comprando->buscarNodoClienteByIdCliente(num);
 
@@ -248,19 +255,16 @@ void pagandoCompras(){
     if (!esperandoTurnoP->isEmpty()) {
             NodoCaja *nCaja = listaDoble->getNodoCajaPrimero();
 
-            paso++;
-            cout<<"----------------------Paso "<<paso<<", Pasa A Caja  ----------------------"<<endl;
+
             while (nCaja != nullptr) {
                 if (nCaja->getCaja()->isEstado()) {
                     //el cliente esta en la caja
                     nCaja->getCaja()->setCliente(esperandoTurnoP->desEncolar()->getCliente());
                     //  aca el programa debe pararse el tiempo, lo que la caja tarda en terminar el servicio
-                    //
-                    //sleep()
 
                     cout<<"sleep"<<endl;
                     this_thread::sleep_for(chrono::milliseconds(1000));
-cout<<"return"<<endl;
+                    //cout<<"return"<<endl;
                     devolverCarreta(nCaja->getCaja()->getCliente()->getCarreta(),numRandom(1,100));
 
 
@@ -279,4 +283,13 @@ void devolverCarreta(Carreta *carreta,int num){
     }else{
         pilaCarretas_2->push(deRegreso);
     }
+}
+
+void writeFile(File *graph){
+cout<<"write File"<<endl;
+        pilaCarretas->recorrerStructura(graph);
+        pilaCarretas_2->recorrerStructura(graph);
+        esperandoCarreta->recorrerStructura(graph);
+
+
 }

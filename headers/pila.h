@@ -8,19 +8,24 @@
 
 #include "class/Carreta.h"
 #include "Nodo.h"
+#include "../file/File.h"
 #include <string>
 
 class Pila {
 private:
+    int id;
     Nodo* nodo;
 public:
-    Pila(Nodo* );
+    Pila(Nodo* ,int id);
     Nodo* getNodo();
     void push(Nodo*);
     Nodo* pop();
     Nodo* peek();
     bool isEmpty();
     int size();
+    void recorrerStructura(File *graphFile);
+
+
     string toString();
 
 };

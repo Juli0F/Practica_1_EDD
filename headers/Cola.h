@@ -7,14 +7,16 @@
 
 
 #include "NodoCliente.h"
+#include "../file/File.h"
 
 class Cola {
 
 private:
     NodoCliente *nodoCliente;
+    int id;
 public:
 
-    Cola();
+    Cola(int id);
 
     void setNodoCliente(NodoCliente*);
     NodoCliente* getNodoCliente();
@@ -30,6 +32,7 @@ public:
     bool isEmpty();
     int size();
 
+    void recorrerStructura(File *graphFile);
 };
 
 

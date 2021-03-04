@@ -3,9 +3,11 @@
 //
 #include "iostream"
 #include "../headers/pila.h"
+#include "string";
 using namespace std;
-Pila::Pila(Nodo *nodoParam) {
+Pila::Pila(Nodo *nodoParam, int id_param) {
     this->nodo = nodoParam;
+    this->id = id_param;
 }
 
 Nodo *Pila::getNodo() {
@@ -85,6 +87,42 @@ int Pila::size() {
         return cont;
     }
 
+}
+
+void Pila::recorrerStructura(File *graphFile) {
+
+int id_pila_int = id;
+string idPila(to_string(id_pila_int));
+graphFile->addLinea("\tsubgraph pila_"+idPila+"{\n\n");
+
+    if (nodo != nullptr){
+
+
+        Nodo *temp = nodo;
+
+        while (temp != nullptr){
+
+            if (temp->getSiguiente() != nullptr) {
+
+
+                int nodo_uno = temp->getCarreta()->getIdCarreta();
+                int nodo_dos = temp->getSiguiente()->getCarreta()->getIdCarreta();
+
+                string nodo_uno_str = to_string(nodo_uno);
+                string nodo_dos_str = to_string(nodo_dos);
+
+                string str = "\t\t" + nodo_uno_str + " -> " + nodo_dos_str + ";\n";
+                graphFile->addLinea(str);
+            }
+
+            temp = temp->getSiguiente();
+
+
+        }
+
+
+    }
+graphFile->addLinea("\t}\n\n");
 }
 
 string Pila::toString() {

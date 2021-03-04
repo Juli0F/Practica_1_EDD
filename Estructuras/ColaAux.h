@@ -7,12 +7,15 @@
 
 
 #include "../headers/Cola.h"
+#include "../file/File.h"
 
 class ColaAux : public Cola {
 private:
     int cont;
+    string *cadena;
 public:
-    void recorrerStructura();
+    void recorrerStructura(File *graphFile);
+    string getSubGraph();
 
 
 };

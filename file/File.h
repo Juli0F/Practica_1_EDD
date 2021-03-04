@@ -14,10 +14,17 @@ private:
     string carpeta;
     string archivo;
     string img;
+    string linea;
+    ofstream file;
 public:
+    void escribirArchivo();
+    void addLinea(string);
+    void closeFile();
+
     void crearCarpeta(char *nombre);
     void crearArchivo(string nombre);
     void crearImg(string nombre);
+
 
 
 };
