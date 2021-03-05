@@ -94,7 +94,7 @@ void Pila::recorrerStructura(File *graphFile,string nombre) {
 int id_pila_int = id;
 string idPila(to_string(id_pila_int));
 
-graphFile->addLinea("\tsubgraph cluster_1 {\n\n");
+graphFile->addLinea("\tsubgraph cluster_"+to_string(id)+" {\n\n");
 
     if (nodo != nullptr){
 
