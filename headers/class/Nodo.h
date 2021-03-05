@@ -5,7 +5,7 @@
 #ifndef PRACTICA_1_NODO_H
 #define PRACTICA_1_NODO_H
 
-#include "class/Cliente.h"
+#include "Cliente.h"
 #include <string>
 
 //nodo para una cola de tipo clientes

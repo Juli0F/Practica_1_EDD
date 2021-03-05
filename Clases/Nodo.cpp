@@ -2,7 +2,7 @@
 // Created by cross on 26/02/21.
 //
 #include "iostream"
-#include "../headers/Nodo.h"
+#include "../headers/class/Nodo.h"
 using namespace std;
 
 Nodo::Nodo(Carreta *carretaParam, Nodo *nodoParam, int ident) {

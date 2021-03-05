@@ -46,7 +46,7 @@ Nodo* Pila::pop() {
         temp->setSiguiente(nullptr);
 
         return aux;
-        delete temp;
+
     }
 
 }
@@ -89,11 +89,14 @@ int Pila::size() {
 
 }
 
-void Pila::recorrerStructura(File *graphFile) {
+void Pila::recorrerStructura(File *graphFile,string nombre) {
 
 int id_pila_int = id;
 string idPila(to_string(id_pila_int));
 graphFile->addLinea("\tsubgraph pila_"+idPila+"{\n\n");
+
+graphFile->addLinea("\t\tlabel = \"" +nombre+"\";\n");
+graphFile->addLinea("\t\tcolor = blue;\n");
 
     if (nodo != nullptr){
 

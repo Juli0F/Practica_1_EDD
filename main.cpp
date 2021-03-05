@@ -1,14 +1,13 @@
 #include <iostream>
 #include "headers/class/Carreta.h"
 #include "headers/pila.h"
-#include "headers/NodoCliente.h"
+#include "headers/class/NodoCliente.h"
 #include "headers/Cola.h"
 #include<stdlib.h>
 #include<time.h>
-#include "Clases/Lista_Circular.h"
-#include "Clases/ListaDoble.h"
+#include "headers/Lista_Circular.h"
+#include "headers/ListaDoble.h"
 #include "file/File.h"
-#include "Estructuras/ColaAux.h"
 #include <chrono>
 #include <thread>
 
@@ -41,7 +40,7 @@ Lista_Circular *comprando; //clientes haciendo compras
 
 Cola *esperandoCarreta;//Clientes que llegan al supermercado, inicialmente pasan por una carreta
 Cola *esperandoTurnoP; //clientes esperando a pagar
-ColaAux *colaAux;
+
 int paso = 0;
 int clientesDisp;
 int tes = -1;
@@ -110,7 +109,7 @@ void crearClientes(int cant){
             nodoCliente = new NodoCliente(i,cliente, nullptr);
             esperandoCarreta->encolar(nodoCliente);
     }
-    colaAux = static_cast<ColaAux *>(esperandoCarreta);
+
 
 }
 void crearCarretas(int cant){
@@ -178,7 +177,7 @@ clientesDisp = 0;
 
         cout<<"Valor FInal antes whie: "<<((esperandoTurnoP->isEmpty() ) && (esperandoCarreta->isEmpty()) && (comprando->isEmpty()))<<endl;
 
-        graph->closeFile();
+        //graph->closeFile();
     } while (!((esperandoTurnoP->isEmpty() ) && (esperandoCarreta->isEmpty()) && (comprando->isEmpty())));
 
 }
@@ -287,9 +286,16 @@ void devolverCarreta(Carreta *carreta,int num){
 
 void writeFile(File *graph){
 cout<<"write File"<<endl;
-        pilaCarretas->recorrerStructura(graph);
-        pilaCarretas_2->recorrerStructura(graph);
-        esperandoCarreta->recorrerStructura(graph);
+        pilaCarretas->recorrerStructura(graph,"Primera Pila De Carretas");
+        pilaCarretas_2->recorrerStructura(graph,"Segunda Pila De Carretas");
+        esperandoCarreta->recorrerStructura(graph,"Personas Esperando Carreta");
+        esperandoTurnoP->recorrerStructura(graph,"Esperando a pasar a Una Caja");
+        comprando->recorrerStructura(graph,"Comprando");
+
+        listaDoble->recorrerStructura(graph,"Cajas");
+
+        graph->closeFile();
+        system("dot -Tpng prueba/graph.dot -o s.png");
 
 
 }

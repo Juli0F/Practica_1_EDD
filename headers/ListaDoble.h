@@ -6,7 +6,8 @@
 #define PRACTICA_1_LISTADOBLE_H
 
 
-#include "../headers/NodoCaja.h"
+#include "class/NodoCaja.h"
+#include "../file/File.h"
 
 class ListaDoble {
 
@@ -23,6 +24,7 @@ public:
     NodoCaja* eliminarByIdNodoCaja(int idNodoCaja);
     NodoCaja* eliminarByIdCaja(int idCaja );
 
+    void recorrerStructura(File *graphFile,string nombre);
 
 };
 

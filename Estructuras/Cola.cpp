@@ -78,13 +78,16 @@ int Cola::size() {
 
 }
 
-void Cola::recorrerStructura(File *graphFile) {
+void Cola::recorrerStructura(File *graphFile,string nombre) {
 
 
 int id_cola_int = id;
 string id_cola(to_string(id_cola_int));
 graphFile->addLinea("\tsubgraph cola_"+id_cola+"{\n\n");
-
+graphFile->addLinea("\t\tlabel = \"" +nombre+"\";\n");
+graphFile->addLinea("\t\tcolor = blue;\n");
+//label = "Container B";
+        //color=blue;
     if (nodoCliente != nullptr) {
 
         NodoCliente *temp = nodoCliente->getSiguiente();

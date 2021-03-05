@@ -6,7 +6,7 @@
 #define PRACTICA_1_NODOCAJA_H
 
 
-#include "class/Caja.h"
+#include "Caja.h"
 
 class NodoCaja {
 private:

@@ -26,7 +26,7 @@ void File::crearImg(string nombre) {
 void File::escribirArchivo() {
   file.open("prueba/graph.dot");
 
-  file << "digraph Graph {\n";
+  file << "digraph  G {\n";
 }
 
 void File::addLinea(string linea) {

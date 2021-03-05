@@ -2,7 +2,7 @@
 // Created by cross on 27/02/21.
 //
 
-#include "ListaDoble.h"
+#include "../headers/ListaDoble.h"
 
 ListaDoble::ListaDoble() {
     this->ultimo = nullptr;
@@ -149,4 +149,44 @@ NodoCaja *ListaDoble::getNodoCajaPrimero() {
 
 NodoCaja *ListaDoble::getNodoCajaUltimo() {
     return this->ultimo;
+}
+
+void ListaDoble::recorrerStructura(File *graphFile,string nombre) {
+
+
+    if (primero != nullptr){
+        graphFile->addLinea("\tsubgraph lista_doble{\n\n");
+        graphFile->addLinea("\t\tlabel = \"" +nombre+"\";\n");
+graphFile->addLinea("\t\tcolor = blue;\n");
+
+        NodoCaja *temp = primero;
+        while (temp != nullptr){
+            if (temp == ultimo){
+                 int id_cliente_1 = ultimo->getCaja()->getIdCaja();
+                int id_cliente_2 = ultimo->getAnterior()->getCaja()->getIdCaja();
+                string id_cliente1_str(to_string(id_cliente_1));//(STRING(id_cliente_1));
+                string id_cliente2_str(to_string(id_cliente_2));//(STRING(id_cliente_2));
+                string strFinal = "\t\t" + id_cliente1_str + " -> " + id_cliente2_str + ";\n";
+                string strFinal_retroceso = "\t\t" + id_cliente2_str + " -> " + id_cliente1_str + ";\n";
+                graphFile->addLinea(strFinal);
+                graphFile->addLinea(strFinal_retroceso);
+                break;
+            }else{
+
+                int id_cliente_1 = temp->getCaja()->getIdCaja();
+                int id_cliente_2 = temp->getSiguiente()->getCaja()->getIdCaja();
+                string id_cliente1_str(to_string(id_cliente_1));//(STRING(id_cliente_1));
+                string id_cliente2_str(to_string(id_cliente_2));//(STRING(id_cliente_2));
+                string strFinal = "\t\t" + id_cliente1_str + " -> " + id_cliente2_str + ";\n";
+                string strFinal_retroceso = "\t\t" + id_cliente2_str + " -> " + id_cliente1_str + ";\n";
+                graphFile->addLinea(strFinal);
+                //graphFile->addLinea(strFinal_retroceso);
+                temp = temp->getSiguiente();
+
+            }
+
+        }
+graphFile->addLinea("\t}\n");
+    }
+
 }

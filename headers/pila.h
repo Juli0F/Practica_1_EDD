@@ -7,7 +7,7 @@
 
 
 #include "class/Carreta.h"
-#include "Nodo.h"
+#include "class/Nodo.h"
 #include "../file/File.h"
 #include <string>
 
@@ -23,7 +23,7 @@ public:
     Nodo* peek();
     bool isEmpty();
     int size();
-    void recorrerStructura(File *graphFile);
+    void recorrerStructura(File *graphFile,string nombre);
 
 
     string toString();

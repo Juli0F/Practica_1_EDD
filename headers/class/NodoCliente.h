@@ -6,7 +6,7 @@
 #define PRACTICA_1_NODOCLIENTE_H
 
 #include <string>
-#include "class/Cliente.h"
+#include "Cliente.h"
 
 using namespace std;
 

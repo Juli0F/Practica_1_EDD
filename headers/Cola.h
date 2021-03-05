@@ -6,7 +6,7 @@
 #define PRACTICA_1_COLA_H
 
 
-#include "NodoCliente.h"
+#include "class/NodoCliente.h"
 #include "../file/File.h"
 
 class Cola {
@@ -32,7 +32,7 @@ public:
     bool isEmpty();
     int size();
 
-    void recorrerStructura(File *graphFile);
+    void recorrerStructura(File *graphFile,string nombre);
 };
 
 

@@ -2,7 +2,7 @@
 // Created by cross on 26/02/21.
 //
 
-#include "../headers/NodoCliente.h"
+#include "../headers/class/NodoCliente.h"
 
 NodoCliente::NodoCliente(int idParam, Cliente *clienteParam, NodoCliente *siguienteParam) {
 

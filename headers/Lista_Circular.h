@@ -6,7 +6,8 @@
 #define PRACTICA_1_LISTA_CIRCULAR_H
 
 
-#include "../headers/NodoCliente.h"
+#include "class/NodoCliente.h"
+#include "../file/File.h"
 
 class Lista_Circular {
 
@@ -21,16 +22,12 @@ public:
     void setNodCliente(NodoCliente *);
      NodoCliente* getNodoCliente();
 
-
      NodoCliente* getUltimo();
-
-
-
-
 
      NodoCliente* buscarNodoClienteByIdNodo(int idBuscar);
      NodoCliente* buscarNodoClienteByIdCliente(int idClienteBuscar);
 
+    void recorrerStructura(File *graphFile,string nombre);
      void add(NodoCliente*);
 
      void eliminar(NodoCliente*);

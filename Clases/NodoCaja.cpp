@@ -2,7 +2,7 @@
 // Created by cross on 27/02/21.
 //
 
-#include "../headers/NodoCaja.h"
+#include "../headers/class/NodoCaja.h"
 
 NodoCaja::NodoCaja(Caja *cajaParam, NodoCaja *primeroParam, NodoCaja *ultimoParam, int id) {
 
