@@ -95,8 +95,7 @@ int id_pila_int = id;
 string idPila(to_string(id_pila_int));
 graphFile->addLinea("\tsubgraph pila_"+idPila+"{\n\n");
 
-graphFile->addLinea("\t\tlabel = \"" +nombre+"\";\n");
-graphFile->addLinea("\t\tcolor = blue;\n");
+
 
     if (nodo != nullptr){
 
@@ -114,7 +113,9 @@ graphFile->addLinea("\t\tcolor = blue;\n");
                 string nodo_uno_str = to_string(nodo_uno);
                 string nodo_dos_str = to_string(nodo_dos);
 
-                string str = "\t\t" + nodo_uno_str + " -> " + nodo_dos_str + ";\n";
+                string str = "\t\t\"" + nodo_uno_str+"_pila"+to_string(id) + "\" -> \"" + nodo_dos_str +"_pila"+to_string(id)+ "\";\n";
+
+                //string strFinal = "\t\t" + id_cliente1_str +"_cola: "+to_string(id)+"  -> " + id_cliente2_str +"_cola: "+to_string(id)+ ";\n";
                 graphFile->addLinea(str);
             }
 
@@ -125,6 +126,8 @@ graphFile->addLinea("\t\tcolor = blue;\n");
 
 
     }
+graphFile->addLinea("\t\tlabel = \"" +nombre+"\";\n");
+graphFile->addLinea("\t\tcolor = blue;\n");
 graphFile->addLinea("\t}\n\n");
 }
 

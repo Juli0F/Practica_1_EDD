@@ -36,4 +36,6 @@ void File::addLinea(string linea) {
 void File::closeFile() {
     file << "}";
     file.close();
+    system("dot -Tpng prueba/graph.dot -o s.png");
+    system("shotwell s.png");
 }

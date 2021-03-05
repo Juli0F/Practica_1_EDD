@@ -251,8 +251,6 @@ void Lista_Circular::recorrerStructura(File *graphFile,string nombre) {
 
     if (primero != nullptr){
         graphFile->addLinea("\tsubgraph lista_circular{\n\n");
-        graphFile->addLinea("\t\tlabel = \"" +nombre+"\";\n");
-        graphFile->addLinea("\t\tcolor = blue;\n");
 
 
         NodoCliente *temp = primero;
@@ -263,8 +261,8 @@ void Lista_Circular::recorrerStructura(File *graphFile,string nombre) {
                 int id_cliente_2 = primero->getCliente()->getId();
                 string id_cliente1_str(to_string(id_cliente_1));//(STRING(id_cliente_1));
                 string id_cliente2_str(to_string(id_cliente_2));//(STRING(id_cliente_2));
-                string strFinal = "\t\t" + id_cliente1_str + " -> " + id_cliente2_str + ";\n";
-                string strFinal_retroceso = "\t\t" + id_cliente2_str + " -> " + id_cliente1_str + ";\n";
+                string strFinal = "\t\t\"" + id_cliente1_str + "_c\" -> \"" + id_cliente2_str + "_c\";\n";
+                string strFinal_retroceso = "\t\t\"" + id_cliente2_str + "_c\" -> \"" + id_cliente1_str + "_c\";\n";
                 graphFile->addLinea(strFinal);
                 graphFile->addLinea(strFinal_retroceso);
                 break;
@@ -275,13 +273,18 @@ void Lista_Circular::recorrerStructura(File *graphFile,string nombre) {
                 int id_cliente_2 = temp->getSiguiente()->getCliente()->getId();
                 string id_cliente1_str(to_string(id_cliente_1));//(STRING(id_cliente_1));
                 string id_cliente2_str(to_string(id_cliente_2));//(STRING(id_cliente_2));
-                string strFinal = "\t\t" + id_cliente1_str + " -> " + id_cliente2_str + ";\n";
-                string strFinal_retroceso = "\t\t" + id_cliente2_str + " -> " + id_cliente1_str + ";\n";
+                string strFinal = "\t\t\"" + id_cliente1_str + "_c\" -> \"" + id_cliente2_str + "_c\";\n";
+                string strFinal_retroceso = "\t\t\"" + id_cliente2_str + "_c\" -> \"" + id_cliente1_str + "_c\";\n";
+                //string strFinal = "\t\t" + id_cliente1_str +"_c  -> " + id_cliente2_str +"_c;\n";
+
                 graphFile->addLinea(strFinal);
                 graphFile->addLinea(strFinal_retroceso);
                 temp = temp->getSiguiente();
             }
         }
+
+        graphFile->addLinea("\t\tlabel = \"" +nombre+"\";\n");
+        graphFile->addLinea("\t\tcolor = blue;\n");
         graphFile->addLinea("\t}\n\n");
     }
 

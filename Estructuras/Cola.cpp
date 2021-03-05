@@ -84,8 +84,7 @@ void Cola::recorrerStructura(File *graphFile,string nombre) {
 int id_cola_int = id;
 string id_cola(to_string(id_cola_int));
 graphFile->addLinea("\tsubgraph cola_"+id_cola+"{\n\n");
-graphFile->addLinea("\t\tlabel = \"" +nombre+"\";\n");
-graphFile->addLinea("\t\tcolor = blue;\n");
+
 //label = "Container B";
         //color=blue;
     if (nodoCliente != nullptr) {
@@ -98,7 +97,7 @@ graphFile->addLinea("\t\tcolor = blue;\n");
                 int id_cliente_2 = temp->getSiguiente()->getCliente()->getId();
                 string id_cliente1_str(to_string(id_cliente_1));//(STRING(id_cliente_1));
                 string id_cliente2_str(to_string(id_cliente_2));//(STRING(id_cliente_2));
-                string strFinal = "\t\t" + id_cliente1_str + " -> " + id_cliente2_str + ";\n";
+                string strFinal = "\t\t\"" + id_cliente1_str +"_cola_"+to_string(id)+"\"  -> \"" + id_cliente2_str +"_cola_"+to_string(id)+ "\";\n";
 
                 graphFile->addLinea(strFinal);
 
@@ -107,6 +106,8 @@ graphFile->addLinea("\t\tcolor = blue;\n");
 
         }
     }
+graphFile->addLinea("\t\tlabel = \"" +nombre+"\";\n");
+graphFile->addLinea("\t\tcolor = blue;\n");
 graphFile->addLinea("\t}\n");
 
 }

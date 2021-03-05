@@ -295,7 +295,7 @@ cout<<"write File"<<endl;
         listaDoble->recorrerStructura(graph,"Cajas");
 
         graph->closeFile();
-        system("dot -Tpng prueba/graph.dot -o s.png");
+
 
 
 }
