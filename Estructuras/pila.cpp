@@ -93,7 +93,8 @@ void Pila::recorrerStructura(File *graphFile,string nombre) {
 
 int id_pila_int = id;
 string idPila(to_string(id_pila_int));
-graphFile->addLinea("\tsubgraph pila_"+idPila+"{\n\n");
+graphFile->addLinea("\tsubgraph cluster_1 {\n\n");
+//graphFile->addLinea("\tsubgraph pila_"+idPila+"{\n\n");
 
 
 

@@ -250,7 +250,8 @@ void Lista_Circular::eliminarByIdCliente(int idCliente) {
 void Lista_Circular::recorrerStructura(File *graphFile,string nombre) {
 
     if (primero != nullptr){
-        graphFile->addLinea("\tsubgraph lista_circular{\n\n");
+        //graphFile->addLinea("\tsubgraph lista_circular{\n\n");
+        graphFile->addLinea("\tsubgraph cluster_3 {\n\n");
 
 
         NodoCliente *temp = primero;

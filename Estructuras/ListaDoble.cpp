@@ -155,20 +155,24 @@ void ListaDoble::recorrerStructura(File *graphFile,string nombre) {
 
 
     if (primero != nullptr){
-        graphFile->addLinea("\tsubgraph lista_doble{\n\n");
+        //graphFile->addLinea("\tsubgraph lista_doble{\n\n");
+        graphFile->addLinea("\tsubgraph cluster_2 {\n\n");
 
 
         NodoCaja *temp = primero;
         while (temp != nullptr){
             if (temp == ultimo){
-                 int id_cliente_1 = ultimo->getCaja()->getIdCaja();
+              /*   int id_cliente_1 = ultimo->getCaja()->getIdCaja();
                 int id_cliente_2 = ultimo->getAnterior()->getCaja()->getIdCaja();
+
                 string id_cliente1_str(to_string(id_cliente_1));//(STRING(id_cliente_1));
                 string id_cliente2_str(to_string(id_cliente_2));//(STRING(id_cliente_2));
+
                 string strFinal = "\t\t\"" + id_cliente1_str + "_d\" -> \"" + id_cliente2_str + "_d\";\n";
-                string strFinal_retroceso = "\t\t\"" + id_cliente2_str + "_d\" -> \"" + id_cliente1_str + "_d;\n\"";
+                string strFinal_retroceso = "\t\t\"" + id_cliente2_str + "_d\" -> \"" + id_cliente1_str + "_d\";\n";
+
                 graphFile->addLinea(strFinal);
-                graphFile->addLinea(strFinal_retroceso);
+                graphFile->addLinea(strFinal_retroceso);*/
                 break;
             }else{
 
@@ -176,10 +180,11 @@ void ListaDoble::recorrerStructura(File *graphFile,string nombre) {
                 int id_cliente_2 = temp->getSiguiente()->getCaja()->getIdCaja();
                 string id_cliente1_str(to_string(id_cliente_1));//(STRING(id_cliente_1));
                 string id_cliente2_str(to_string(id_cliente_2));//(STRING(id_cliente_2));
-                string strFinal = "\t\t" + id_cliente1_str + " -> " + id_cliente2_str + ";\n";
-                string strFinal_retroceso = "\t\t" + id_cliente2_str + " -> " + id_cliente1_str + ";\n";
+                string strFinal = "\t\t\"" + id_cliente1_str + "_d\" -> \"" + id_cliente2_str + "_d\";\n";
+                string strFinal_retroceso = "\t\t\"" + id_cliente2_str + "_d\" -> \"" + id_cliente1_str + "_d\";\n";
+
                 graphFile->addLinea(strFinal);
-                //graphFile->addLinea(strFinal_retroceso);
+                graphFile->addLinea(strFinal_retroceso);
                 temp = temp->getSiguiente();
 
             }

@@ -83,7 +83,9 @@ void Cola::recorrerStructura(File *graphFile,string nombre) {
 
 int id_cola_int = id;
 string id_cola(to_string(id_cola_int));
-graphFile->addLinea("\tsubgraph cola_"+id_cola+"{\n\n");
+graphFile->addLinea("\tsubgraph cluster_0 {\n\n");
+//graphFile->addLinea("\tsubgraph cola_"+id_cola+"{\n\n");
+graphFile->addLinea("\t//Cola+ "+nombre+"\n\n");
 
 //label = "Container B";
         //color=blue;
