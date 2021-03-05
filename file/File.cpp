@@ -38,4 +38,6 @@ void File::closeFile() {
     file.close();
     system("dot -Tpng prueba/graph.dot -o s.png");
     system("shotwell s.png");
+    system("exit");
+
 }

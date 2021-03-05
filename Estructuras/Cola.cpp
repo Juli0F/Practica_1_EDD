@@ -84,8 +84,8 @@ void Cola::recorrerStructura(File *graphFile,string nombre) {
 int id_cola_int = id;
 string id_cola(to_string(id_cola_int));
 graphFile->addLinea("\tsubgraph cluster_0 {\n\n");
-//graphFile->addLinea("\tsubgraph cola_"+id_cola+"{\n\n");
 graphFile->addLinea("\t//Cola+ "+nombre+"\n\n");
+
 
 //label = "Container B";
         //color=blue;
@@ -99,7 +99,7 @@ graphFile->addLinea("\t//Cola+ "+nombre+"\n\n");
                 int id_cliente_2 = temp->getSiguiente()->getCliente()->getId();
                 string id_cliente1_str(to_string(id_cliente_1));//(STRING(id_cliente_1));
                 string id_cliente2_str(to_string(id_cliente_2));//(STRING(id_cliente_2));
-                string strFinal = "\t\t\"" + id_cliente1_str +"_cola_"+to_string(id)+"\"  -> \"" + id_cliente2_str +"_cola_"+to_string(id)+ "\";\n";
+                string strFinal = "\t\t\"cliente: " + id_cliente1_str +" cola "+to_string(id)+"\"  -> \"cliente: " + id_cliente2_str +" cola "+to_string(id)+ "\";\n";
 
                 graphFile->addLinea(strFinal);
 
@@ -108,6 +108,7 @@ graphFile->addLinea("\t//Cola+ "+nombre+"\n\n");
 
         }
     }
+
 graphFile->addLinea("\t\tlabel = \"" +nombre+"\";\n");
 graphFile->addLinea("\t\tcolor = blue;\n");
 graphFile->addLinea("\t}\n");
